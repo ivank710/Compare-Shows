@@ -1,103 +1,81 @@
 const axios = require('axios');
-// const HTMLParser = require('node-html-parser');
-// import { parse } from "node-html-parser";
+const HTMLParser = require('node-html-parser');
+import { parse } from "node-html-parser";
 
 
 console.log('working');
 
 document.addEventListener('DOMContentLoaded', () => {
-  
-  const getShow = () => {
-    const userInput = document.getElementById("showTitle").value;
-    
-    axios
-    .get(`http://api.tvmaze.com/singlesearch/shows/?q=${userInput}`)  //get show
-    .then(response => {
-      const showId = response.data.id;
-      const premiereDate = response.data.premiered;
-      const genres = response.data.genres; //array of genres
-      const rating = response.data.rating.average;
-      const runtime = response.data.runtime;
-      // const summary = HTMLParser.parse(response.data.summary);
-      const summary = response.data.summary;
-      let network = "";
-      if (response.data.network) {
-        network = response.data.network.name;
-      } else if (response.data.webChannel.name){
-        network = response.data.webChannel.name;
-      }
-      // console.log(response.data);
-
-      axios
-      .get(`http://api.tvmaze.com/shows/${showId}/seasons`)   //get seasons
-      .then(response => { //array of each season
-        for(let i = 0; i < response.data.length; i++) {
-          let seasonId = response.data[i].id;
-          
-          axios
-          .get(`http://api.tvmaze.com/seasons/${seasonId}/episodes`)
-          .then(response => {
-            const season = response.data;
-            // console.log(season); //array of one season w/ its episodes as Obj
-
-          });
-        }
-
-      axios
-      .get(`http://api.tvmaze.com/shows/${showId}/cast`) //get cast
-      .then(response => {
-        let mainCast = response.data; //array of each character
-        // console.log(mainCast);
-
-        for(let j = 0; j < mainCast.length; j++) {
-          let personId = mainCast[j].person.id;
-
-          axios
-          .get(`http://api.tvmaze.com/people/${personId}/castcredits`)
-          .then(response => {
-            let otherShows = response.data; //array of each char's shows
-            // console.log(response.data);
-
-            for(let k = 0; k < otherShows.length; k++) {
-              let relatedShowUrl = otherShows[k]._links.show.href;  //get show url
-              // console.log(otherShows[k]._links.show.href);
-              axios
-              .get(relatedShowUrl)
-              .then(response => {
-                let showObj = response.data;  //showObj.name 
-                // console.log(showObj);  
-              });
-            }
-          });
-        }
-      });
-
-      axios
-        .get(`http://api.tvmaze.com/shows/${showId}/crew`)
-        .then(response => {
-          const crewMembers = response.data; //array of each crew member(obj)
-          console.log(crewMembers);
-        });
-
-      });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  let showData = {
+    info: {},
+    seasons: {},
+    cast: {},
+    crew: {}
   };
   
+  const getShow = async () => {
+    const userInput = document.getElementById("showTitle").value;
+    
+    const response = await axios.get(`http://api.tvmaze.com/singlesearch/shows/?q=${userInput}`); 
+
+    showData.id = response.data.id;
+    showData.info.premiereDate = response.data.premiered;
+    showData.info.genres = response.data.genres;
+    showData.info.rating = response.data.rating.average;
+    showData.info.runtime = response.data.runtime;
+    showData.info.summary = response.data.summary; //need to parse html
+    if (response.data.network) {
+      showData.info.network = response.data.network.name;
+    } else if (response.data.webChannel.name) {
+      showData.info.network = response.data.webChannel.name;
+    }
+
+    const seasons = await axios.get(`http://api.tvmaze.com/shows/431/seasons`);   //get seasons
+    showData.seasons = seasons.data;
+   
+    for(let i = 0; i < showData.seasons.length; i++) {
+      let seasonId = showData.seasons[i].id;
+      
+      const episodes = await axios.get(`http://api.tvmaze.com/seasons/${seasonId}/episodes`);
+      showData.seasons[i] = episodes.data;
+    }
+    
+    const cast = await axios.get(`http://api.tvmaze.com/shows/${showData.id}/cast`);
+    showData.cast = cast.data;
+    // console.log(cast.data);
+
+    const crew = await axios.get(`http://api.tvmaze.com/shows/${showData.id}/crew`);
+    showData.crew = crew.data;
+    // console.log(crew.data);
+    
+    for(let j = 0; j < showData.cast.length; j++) {   //assign each cast member's person obj with one's other show urls
+      let member = showData.cast[j];
+      let personId = member.person.id;
+      
+      const otherShows = await axios.get(`http://api.tvmaze.com/people/${personId}/castcredits`); //get the person's other shows
+      showData.cast[j].person.showUrls = otherShows.data;
+      showData.cast[j].person.shows = [];
+
+      for (let k = 0; k < showData.cast[j].person.showUrls.length; k++) {
+        let showUrl = showData.cast[j].person.showUrls[k]._links.show.href;  //get show url
+
+        const show = await axios.get(showUrl);  //get the show
+        const showName = show.data.name;
+        showData.cast[j].person.shows.push(showName);
+      }
+    }
+    
+    console.log(showData)
+
+
+  };
+
+
   const showButton = document.getElementById("findShow");
   showButton.addEventListener("click", getShow);
 
 
-  // const initialState = {};
-  // const dataReducer = (state = initialState, action) => {
-  //   switch(action.type) {
-  //     case 'a':
-  //     default: 
-  //       return state;
-  //   }
-  // }
+
   
 });
 
