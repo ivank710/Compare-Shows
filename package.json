@@ -2,7 +2,7 @@
   "name": "JS_Project",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --watch --mode=development",
@@ -25,7 +25,6 @@
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "node-fetch": "^2.3.0",
-    "node-html-parser": "^1.1.12",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0"
   }

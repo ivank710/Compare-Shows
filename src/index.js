@@ -2,7 +2,6 @@ const axios = require('axios');
 const HTMLParser = require('node-html-parser');
 import { parse } from "node-html-parser";
 
-
 console.log('working');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -66,6 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     console.log(showData)
+
+    // const nodeDate = {
+    //   "root": `title`, 
+    //   "children": [{
+    //     "name1": "Basic Info",
+    //     "children": [{"Premiere Date": `${showData.info.premiereDate}`, "size": 1 }, {"Rating": `${showData.info.rating}`, "size": 1 }, {"Runtime": `${showData.info.runtime}`, "size": 1}, 
+    //                 {"Summary": `${showData.info.summary}`, "size": 1}, {"Genres": `${showData.info.genres}`, }]
+    //   }]
+    // }
 
 
   };
