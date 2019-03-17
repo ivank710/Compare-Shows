@@ -8,23 +8,23 @@ console.log('working');
 document.addEventListener('DOMContentLoaded', () => {
 
   let nodeData = {
-    node: "",
+    name: "",
     children: [
     {
-      node: "Info",
+      name: "Info",
       children: [{ "name": "Premiere Date", "value": ""}, {"name": "Rating", "value": ""}, {"name": "Runtime", "value": ""}, {"name": "Network", "value": ""},
       {"name": "Summary", "value": ""}, {"name": "Genres", "children": []}]
     },
     {
-      node: "Seasons",
+      name: "Seasons",
       children: []
     },
     {
-      node: "Cast",
+      name: "Cast",
       children: []
     },
     {
-      node: "Crew",
+      name: "Crew",
       children: []
     }
     ]
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const getShow = async () => {
     const userInput = document.getElementById("showTitle").value;
-    nodeData.node = userInput;
+    nodeData.name = userInput;
     
     const response = await axios.get(`http://api.tvmaze.com/singlesearch/shows/?q=${userInput}`); 
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (let a = 0; a < nodeData.children.length; a++) {
       let child = nodeData.children[a];
-      if (child.node === "Info") {
+      if (child.name === "Info") {
         for (let b = 0; b < child.children.length; b++) {
           let innerChild = child.children[b];
           if (innerChild.name === "Premiere Date") {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
         }
-      } else if (child.node === "Seasons") {
+      } else if (child.name === "Seasons") {
         const seasons = await axios.get(`http://api.tvmaze.com/shows/${showId}/seasons`);   //get seasons
         // child.size = seasons.data.length;
 
@@ -81,11 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
           child.children.push(episodes.data);
         }
      
-      } else if (child.node === "Cast") {
+      } else if (child.name === "Cast") {
         const cast = await axios.get(`http://api.tvmaze.com/shows/${showId}/cast`);
 
         child.children = cast.data;
-      } else if (child.node === "Crew") {
+      } else if (child.name === "Crew") {
         const crew = await axios.get(`http://api.tvmaze.com/shows/${showId}/crew`);
 
         child.children = crew.data;
@@ -95,12 +95,12 @@ document.addEventListener('DOMContentLoaded', () => {
     for(let it = 0; it < nodeData.children.length; it++) {    //format seasons with children nodes 
       let child = nodeData.children[it];
 
-      if(child.node === "Seasons") {
+      if(child.name === "Seasons") {
         let seasonsChildren = [];
 
         for(let e = 0; e < child.children.length; e++) {
           let episodes = child.children[e];
-          let epChild = {"node": `Season ${e + 1}`, "children": []};
+          let epChild = {"name": `Season ${e + 1}`, "children": []};
 
           for(let l = 0; l < episodes.length; l++) {
             let ep = episodes[l];
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         child.children = seasonsChildren;
         
-      } else if(child.node === "Cast") {
+      } else if(child.name === "Cast") {
         let castChildren = [];
 
         for(let f = 0; f < child.children.length; f++) {
@@ -130,13 +130,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const show = await axios.get(showUrl);
             const showName = show.data.name;
-            let showNode = {"Show": showName, "size": 1};
+            let showNode = {"name": showName, "size": 1};
             charChild.children.push(showNode);
           }
           castChildren.push(charChild);
         }
         child.children = castChildren;
-      } else if(child.node === "Crew") {
+      } else if(child.name === "Crew") {
           let crewChildren = [];
 
           for(let z = 0; z < child.children.length; z++) {
