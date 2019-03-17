@@ -1,5 +1,5 @@
 const axios = require('axios');
-// const HTMLParser = require('node-html-parser');
+const HTMLParser = require('node-html-parser');
 // import { parse } from "node-html-parser";
 import renderSunburst from './d3';
 
@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     children: [
     {
       name: "Info",
-      children: [{ "name": "Premiere Date", "value": ""}, {"name": "Rating", "value": ""}, {"name": "Runtime", "value": ""}, {"name": "Network", "value": ""},
-      {"name": "Summary", "value": ""}, {"name": "Genres", "children": []}]
+      children: [{ "name": "Premiere", "children": []}, {"name": "Rating", "children": []}, {"name": "Runtime", "children": []}, {"name": "Network", "children": []},
+      {"name": "Summary", "children": []}, {"name": "Genres", "children": []}]
     },
     {
       name: "Seasons",
@@ -43,25 +43,26 @@ document.addEventListener('DOMContentLoaded', () => {
       if (child.name === "Info") {
         for (let b = 0; b < child.children.length; b++) {
           let innerChild = child.children[b];
-          if (innerChild.name === "Premiere Date") {
-            innerChild.value = response.data.premiered;
-            innerChild.size = 1;
+          if (innerChild.name === "Premiere") {
+            let premierNode = { "name": response.data.premiered, "size": 1};
+            innerChild.children.push(premierNode);
           } else if (innerChild.name === "Rating") {
-            innerChild.value = response.data.rating.average;
-            innerChild.size = 1;
+            let ratingNode = { "name": `${response.data.rating.average}`, "size": 1};
+            innerChild.children.push(ratingNode);
           } else if (innerChild.name === "Runtime") {
-            innerChild.value = response.data.runtime;
-            innerChild.size = 1;
+            let runtimeNode = { "name": `${response.data.runtime}`, "size": 1};
+            innerChild.children.push(runtimeNode);
           } else if (innerChild.name === "Network") {
             if (response.data.network) {
-              innerChild.value = response.data.network.name;
+              let networkNode = { "name": response.data.network.name, "size": 1};
+              innerChild.children.push(networkNode);
             } else if (response.data.webChannel.name) {
-              innerChild.value = response.data.webChannel.name;
+              let networkNode = { "name": response.data.webChannel.name, "size": 1 };
+              innerChild.children.push(networkNode);
             }
-            innerChild.size = 1;
           } else if (innerChild.name === "Summary") {
-            innerChild.value = response.data.summary;
-            innerChild.size = 1;
+            let sumNode = { "name": HTMLParser.parse(`${response.data.summary}`), "size": 1};
+            innerChild.children.push(sumNode);
           } else if (innerChild.name === "Genres") {
             for (let c = 0; c < response.data.genres.length; c++) {
               let genre = response.data.genres[c];
@@ -106,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let ep = episodes[l];
             let epName = ep.name;
 
-            let epNode = {"name": epName, "size": 1};
+            let epNode = {"value": `Episode ${l + 1}`, "name": epName, "size": 1};
             epChild.children.push(epNode);
           }
 
@@ -144,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let role = crewMember.type;
             let name = crewMember.person.name;
 
-            let crewNode = {"name": name, "role": role, "size": 1};
+            let crewNode = {"name": name, "value": role, "size": 1};
             crewChildren.push(crewNode);
           }
 
@@ -152,12 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // return nodeData;
-    // console.log(nodeData);
     renderSunburst(nodeData);
-  }
-
-   
+  };
+  
   
   const showButton = document.getElementById("findShow");
   showButton.addEventListener("click", getShow);

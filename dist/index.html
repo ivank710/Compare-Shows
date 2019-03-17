@@ -4,6 +4,32 @@
 <head>
   <meta charset="utf-8">
   <title>Getting Started</title>
+  <style>
+    body {
+      font-family: Sans-serif;
+      font-size: 14px;
+      background: #E5E2E0;
+    }
+  
+    .slice {
+      cursor: pointer;
+    }
+  
+    .slice .main-arc {
+      stroke: lightgrey;
+      stroke-width: 2px;
+    }
+  
+    .slice .hidden-arc {
+      fill: none;
+    }
+  
+    .slice text {
+      pointer-events: none;
+      dominant-baseline: middle;
+      text-anchor: middle;
+    }
+  </style>
   <script src="https://d3js.org/d3.v5.js"></script>
   <script type="text/javascript" src="bundle.js"></script>
 </head>
