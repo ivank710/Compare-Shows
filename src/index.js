@@ -120,16 +120,15 @@ document.addEventListener('DOMContentLoaded', () => {
         for(let f = 0; f < child.children.length; f++) {
           let char = child.children[f];
           let personId = char.person.id;
-          let charChild = { "name": `${char.person.name}`, "children": [] };
+          // console.log(char)
+          let charChild = { "name": char.person.name, "character": char.character.name, "children": [] };
 
           const otherShows = await axios.get(`http://api.tvmaze.com/people/${personId}/castcredits`);
-          // console.log(otherShows.data);
           for(let g = 0; g < otherShows.data.length; g++) {
             let charCredit = otherShows.data[g];
             let showUrl = charCredit._links.show.href;
 
             const show = await axios.get(showUrl);
-            // console.log(show)
             const showName = show.data.name;
             let showNode = {"Show": showName, "size": 1};
             charChild.children.push(showNode);
@@ -149,10 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
             crewChildren.push(crewNode);
           }
 
-          child.children = crewChildren;
-        
+        child.children = crewChildren;
       }
-
     }
 
     // return nodeData;
