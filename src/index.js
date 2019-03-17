@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
               innerChild.children.push(networkNode);
             }
           } else if (innerChild.name === "Summary") {
-            let sumNode = { "name": HTMLParser.parse(`${response.data.summary}`), "size": 1};
+            let sumNode = { "name": response.data.summary, "size": 1};
             innerChild.children.push(sumNode);
           } else if (innerChild.name === "Genres") {
             for (let c = 0; c < response.data.genres.length; c++) {
