@@ -2,7 +2,10 @@ import * as d3 from 'd3';
 
 const renderSunburst = nodeData => {
   console.log(nodeData);
-  d3.select("svg").remove();
+  // svg.selectAll("*").remove();
+  // d3.select("svg").remove();
+
+  d3.select("svg").empty();
 
   const width = window.innerWidth,
     height = window.innerHeight,
@@ -94,6 +97,8 @@ const renderSunburst = nodeData => {
     return d.data.name.length * CHAR_SPACE < perimeter;
   };
 
+  
+
   const svg = d3
     .select('body')
     .append('svg')
@@ -183,7 +188,7 @@ const renderSunburst = nodeData => {
 
     moveStackToFront(d);
 
-    //
+    
 
     function moveStackToFront(elD) {
       svg

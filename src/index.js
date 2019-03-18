@@ -160,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (key === 13) {
       getShow();
+      return false;
     }
 
   });
