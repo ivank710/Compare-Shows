@@ -1,0 +1,20 @@
+.header-container{
+  display: flex;
+  justify-content: center;
+}
+
+.header-box{
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title{
+  font-size: 50px;
+  
+}
+
+.input-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

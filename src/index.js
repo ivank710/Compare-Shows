@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "Info",
       children: [{ "name": "Premiere", "children": []}, {"name": "Rating", "children": []}, {"name": "Runtime", "children": []}, {"name": "Network", "children": []},
-      {"name": "Summary", "children": []}, {"name": "Genres", "children": []}]
+      {"name": "Genres", "children": []}]
     },
     {
       name: "Seasons",
@@ -60,9 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
               let networkNode = { "name": response.data.webChannel.name, "size": 1 };
               innerChild.children.push(networkNode);
             }
-          } else if (innerChild.name === "Summary") {
-            let sumNode = { "name": response.data.summary, "size": 1};
-            innerChild.children.push(sumNode);
           } else if (innerChild.name === "Genres") {
             for (let c = 0; c < response.data.genres.length; c++) {
               let genre = response.data.genres[c];
@@ -145,8 +142,10 @@ document.addEventListener('DOMContentLoaded', () => {
             let role = crewMember.type;
             let name = crewMember.person.name;
 
-            let crewNode = {"name": name, "value": role, "size": 1};
-            crewChildren.push(crewNode);
+            let roleNode = {"name": role, "children": []};
+            crewChildren.push(roleNode);
+            let crewNode = {"name": name, "size": 1};
+            roleNode.children.push(crewNode);
           }
 
         child.children = crewChildren;
