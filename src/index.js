@@ -32,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById("showTitle").value;
     nodeData.name = userInput;
     
-    const response = await axios.get(`https://api.tvmaze.com/singlesearch/shows/?q=${userInput}`); 
+    const response = await axios.get(
+      `https://api.tvmaze.com/singlesearch/shows/?q=${userInput}`
+    ); 
 
     let showId = response.data.id;
 
