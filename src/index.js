@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById("showTitle").value;
     nodeData.name = userInput;
     
-    const response = await axios.get(`http://api.tvmaze.com/singlesearch/shows/?q=${userInput}`); 
+    const response = await axios.get(`https://api.tvmaze.com/singlesearch/shows/?q=${userInput}`); 
 
     let showId = response.data.id;
 
@@ -69,22 +69,22 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
       } else if (child.name === "Seasons") {
-        const seasons = await axios.get(`http://api.tvmaze.com/shows/${showId}/seasons`);   //get seasons
+        const seasons = await axios.get(`https://api.tvmaze.com/shows/${showId}/seasons`);   //get seasons
         // child.size = seasons.data.length;
 
         for (let i = 0; i < seasons.data.length; i++) {
           let seasonId = seasons.data[i].id;
 
-          const episodes = await axios.get(`http://api.tvmaze.com/seasons/${seasonId}/episodes`);
+          const episodes = await axios.get(`https://api.tvmaze.com/seasons/${seasonId}/episodes`);
           child.children.push(episodes.data);
         }
      
       } else if (child.name === "Cast") {
-        const cast = await axios.get(`http://api.tvmaze.com/shows/${showId}/cast`);
+        const cast = await axios.get(`https://api.tvmaze.com/shows/${showId}/cast`);
 
         child.children = cast.data;
       } else if (child.name === "Crew") {
-        const crew = await axios.get(`http://api.tvmaze.com/shows/${showId}/crew`);
+        const crew = await axios.get(`https://api.tvmaze.com/shows/${showId}/crew`);
 
         child.children = crew.data;
       }
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // console.log(char)
           let charChild = { "name": char.person.name, "character": char.character.name, "children": [] };
 
-          const otherShows = await axios.get(`http://api.tvmaze.com/people/${personId}/castcredits`);
+          const otherShows = await axios.get(`https://api.tvmaze.com/people/${personId}/castcredits`);
           for(let g = 0; g < otherShows.data.length; g++) {
             let charCredit = otherShows.data[g];
             let showUrl = charCredit._links.show.href;
