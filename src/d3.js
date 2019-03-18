@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 
 const renderSunburst = nodeData => {
   console.log(nodeData);
+  d3.select("svg").remove();
 
   const width = window.innerWidth,
     height = window.innerHeight,
@@ -17,7 +18,9 @@ const renderSunburst = nodeData => {
   const y = d3.scaleSqrt().range([maxRadius * 0.1, maxRadius]);
 
   const dark = [
-
+    '#B08B12',
+    '#BA5F06',
+    '#8C3B00',
     '#6D191B',
     '#842854',
     '#5F7186',

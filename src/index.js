@@ -1,8 +1,6 @@
 const axios = require('axios');
 import renderSunburst from './d3';
 
-console.log('working');
-
 document.addEventListener('DOMContentLoaded', () => {
 
   let nodeData = {
@@ -157,8 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
   
   
   const showButton = document.getElementById("findShow");
+  showButton.addEventListener("keypress", function (e) {
+    let key = e.which || e.keyCode || 0;
+
+    if (key === 13) {
+      getShow();
+    }
+
+  });
   showButton.addEventListener("click", getShow);
-  
+
 });
 
 

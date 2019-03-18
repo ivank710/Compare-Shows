@@ -11,15 +11,32 @@
 .title{
   display: flex;
   justify-content: center;
-  font-size: 50px;
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  /* color: #B6D2E7; */
 }
 
 .subtitle{
-  font-size: 30px;
+  font-size: 35px;
+  font-family: 'Playfair Display', serif;
 }
 
 .input-box{
   display: flex;
   flex-direction: row;
   justify-content: center;
+  
+}
+
+input{
+  padding: 10px 20px;
+  font-size: 20px;
+
+  font-family: 'Playfair Display', serif;
+}
+
+button{
+  padding: 3px 15px 4px;
+  font-size: 20px;
+  font-family: 'Playfair Display', serif;
 }
