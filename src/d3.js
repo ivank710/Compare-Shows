@@ -31,24 +31,24 @@ const renderSunburst = nodeData => {
 
   const mid = [
 
-    '#D15A86',
-    '#8E6C8A',
-    '#6B99A1',
-    '#42A5B3',
-    '#0F8C79',
-    '#6BBBA1',
-    '#5C8100'
+    // '#D15A86',
+    // '#8E6C8A',
+    // '#6B99A1',
+    // '#42A5B3',
+    // '#0F8C79',
+    // '#6BBBA1',
+    // '#5C8100'
   ];
 
   const light = [
  
-    '#DCBDCF',
-    '#B396AD',
-    '#B0CBDB',
-    '#33B6D0',
-    '#7ABFCC',
-    '#C8D7A1',
-    '#A0B700'
+  //   '#DCBDCF',
+  //   '#B396AD',
+  //   '#B0CBDB',
+  //   '#33B6D0',
+  //   '#7ABFCC',
+  //   '#C8D7A1',
+  //   '#A0B700'
   ];
 
   const palettes = [light, mid, dark];
@@ -98,8 +98,8 @@ const renderSunburst = nodeData => {
   const svg = d3
     .select('svg')
     // .append('svg')
-    .style('width', '100vw')
-    .style('height', '100vh')
+    .style('width', '95vw')
+    .style('height', '95vh')
     .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
     .on('click', () => focusOn()); // Reset zoom on canvas click
   

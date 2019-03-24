@@ -1,3 +1,12 @@
+body {
+  background: url('tv3.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  image-rendering: -webkit-optimize-contrast;
+}
+
 .header-container{
   display: flex;
   justify-content: center;
@@ -13,12 +22,13 @@
   justify-content: center;
   font-family: 'Playfair Display', serif;
   font-size: 60px;
-  /* color: #B6D2E7; */
+  color: #467EF0;
 }
 
 .subtitle{
   font-size: 35px;
   font-family: 'Playfair Display', serif;
+  color: #467EF0;
 }
 
 .input-box{
