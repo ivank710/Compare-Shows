@@ -1,5 +1,6 @@
 const axios = require('axios');
 import renderSunburst from './d3';
+import * as d3 from "d3";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -25,8 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     ]
   };
+
+  const clearChart = () => {
+    let svgEl = d3.select("svg");
+    svgEl.selectAll("*").remove();
+  };
   
   const getShow = async () => {
+    clearChart();
+
     const userInput = document.getElementById("showTitle").value;
     nodeData.name = userInput;
     
@@ -116,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
         for(let f = 0; f < child.children.length; f++) {
           let char = child.children[f];
           let personId = char.person.id;
-          // console.log(char)
           let charChild = { "name": char.person.name, "character": char.character.name, "children": [] };
 
           const otherShows = await axios.get(`https://api.tvmaze.com/people/${personId}/castcredits`);
@@ -155,16 +162,18 @@ document.addEventListener('DOMContentLoaded', () => {
   
   
   const showButton = document.getElementById("findShow");
-  showButton.addEventListener("keypress", function (e) {
-    let key = e.which || e.keyCode || 0;
-
-    if (key === 13) {
-      getShow();
-      return false;
+  const inputBox = document.getElementById('showTitle');
+  
+  showButton.onclick = clearChart();
+  inputBox.addEventListener("keyup", function(e) {
+    if(e.keyCode === 13) {
+      e.preventDefault();
+      document.getElementById("findShow").click();
     }
-
   });
+
   showButton.addEventListener("click", getShow);
+
 
 });
 

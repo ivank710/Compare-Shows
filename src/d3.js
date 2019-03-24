@@ -2,10 +2,6 @@ import * as d3 from 'd3';
 
 const renderSunburst = nodeData => {
   console.log(nodeData);
-  // svg.selectAll("*").remove();
-  // d3.select("svg").remove();
-
-  d3.select("svg").empty();
 
   const width = window.innerWidth,
     height = window.innerHeight,
@@ -100,8 +96,8 @@ const renderSunburst = nodeData => {
   
 
   const svg = d3
-    .select('body')
-    .append('svg')
+    .select('svg')
+    // .append('svg')
     .style('width', '100vw')
     .style('height', '100vh')
     .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
