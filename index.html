@@ -41,19 +41,37 @@
 <body>
   <main id='main'></main>
   <div class="header-container">
+
+    <div class="instructions-box">
+      <strong class="instructions">How To Use Chart</strong> <br>
+      <div class="instruct1">• Enter a TV show title and find show</div> 
+      <div class="instruct1">• Click on any arc to zoom in</div>
+      <div class="instruct1">• Click on the center circle to zoom out</div>
+      <div class="instruct1">• Click on canvas background to reset zoom</div>
+      
+    </div>
+
     <div class="header-box">
       <h1 class="title">Show Me</h1>
-      <h2 class="subtitle">See Info About Your Show</h2>
+      <h2 class="subtitle">See Info About Your Show</h2> <br>
+      <div class="input-box">
+        <input id="showTitle" type="text" placeholder="Title of show" />
+        &nbsp;&nbsp;
+        <button id="findShow" type="submit">Find Show</button>
+      </div>
+    </div>
+
+    <div class="directions-box">
+      <strong class="directions">How To Read Data</strong> <br>
+      <div class="read">• <strong>Info</strong> (Network, Runtime, Rating, Premiere Date, Genres)</div>
+      <div class="read">• <strong>Crew</strong> (Creator, Producers, etc)</div>
+      <div class="read">• <strong>Cast</strong> (Actors & Actresses, and their other shows)</div>
+      <div class="read">• <strong>Seasons</strong> (Episodes for each season)</div>
+
     </div>
   </div>
-  
-  <div class="input-box">
-    
-      <input id="showTitle" type="text" placeholder="Title of show" />
-      &nbsp;&nbsp;
-      <button id="findShow" type="submit">Find Show</button>
 
-  </div>
+  <div id="loader"></div>
 
   <svg ></svg> 
   <!-- where our d3 visualization will get drawn -->

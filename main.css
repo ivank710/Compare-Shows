@@ -9,7 +9,7 @@ body {
 
 .header-container{
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .header-box{
@@ -20,12 +20,16 @@ body {
 .title{
   display: flex;
   justify-content: center;
+  margin-block-start: .2em;
+  margin-block-end: 0em;
   font-family: 'Playfair Display', serif;
   font-size: 60px;
   color: #467EF0;
 }
 
 .subtitle{
+  margin-block-start: 0%;
+  margin-block-end: 0%;
   font-size: 35px;
   font-family: 'Playfair Display', serif;
   color: #467EF0;
@@ -39,14 +43,110 @@ body {
 }
 
 input{
-  padding: 10px 20px;
+  padding: 10px 22px;
   font-size: 20px;
 
   font-family: 'Playfair Display', serif;
 }
 
 button{
-  padding: 3px 15px 4px;
+  padding: 3px 18px 4px;
   font-size: 20px;
   font-family: 'Playfair Display', serif;
 }
+
+.instructions-box, .directions-box {
+  display: flex;
+  flex-direction: column;
+   background-color: #467EF0;
+  width: 300px;
+  /* border: 25px solid green; */
+  padding: 25px;
+  margin: 25px;
+  border-radius: 5.5px;
+}
+
+.instructions {
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  font-size: 22px;
+}
+
+.instruct1{
+  padding-bottom: 10px;
+  font-size: 16px;
+}
+
+.directions-box {
+  /* display: flex;
+  flex-direction: column;
+  background-color: #467EF0;
+  width: 300px; */
+  /* border: 25px solid green; */
+  /* padding: 25px;
+  margin: 25px;
+  border-radius: 5.5px; */
+  /* color: white; */
+}
+
+.directions {
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+  font-size: 20px;
+}
+
+.read {
+  padding-bottom: 10px;
+  font-size: 15.8px;
+}
+
+
+
+/* #loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  z-index: -1;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} */
+
+/* Add animation to "page content" */
+/* .animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+} */
