@@ -2,7 +2,9 @@ const axios = require('axios');
 import renderSunburst from './d3';
 import * as d3 from "d3";
 
+
 document.addEventListener('DOMContentLoaded', () => {
+
 
   let nodeData = {
     name: "",
@@ -159,12 +161,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderSunburst(nodeData);
   };
-  
-  
+
+  const loader = document.getElementById("loader");  
   const showButton = document.getElementById("findShow");
   const inputBox = document.getElementById('showTitle');
+
+
   
   showButton.onclick = clearChart();
+  
   inputBox.addEventListener("keyup", function(e) {
     if(e.keyCode === 13) {
       e.preventDefault();
@@ -173,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   showButton.addEventListener("click", getShow);
-
 
 });
 
