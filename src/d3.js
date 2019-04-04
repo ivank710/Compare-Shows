@@ -2,6 +2,8 @@ import * as d3 from 'd3';
 
 const renderSunburst = nodeData => {
   console.log(nodeData);
+  let loader = document.getElementsByTagName("div")[13];
+  loader.classList.remove('loader');
 
   const width = window.innerWidth,
     height = window.innerHeight,

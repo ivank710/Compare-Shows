@@ -5,7 +5,6 @@ import * as d3 from "d3";
 
 document.addEventListener('DOMContentLoaded', () => {
 
-
   let nodeData = {
     name: "",
     children: [
@@ -36,6 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const getShow = async () => {
     clearChart();
+
+    let loader = document.getElementsByTagName("div")[13];
+    console.log('hello');
+    loader.className += 'loader';
 
     const userInput = document.getElementById("showTitle").value;
     nodeData.name = userInput;
@@ -162,13 +165,16 @@ document.addEventListener('DOMContentLoaded', () => {
     renderSunburst(nodeData);
   };
 
-  const loader = document.getElementById("loader");  
   const showButton = document.getElementById("findShow");
   const inputBox = document.getElementById('showTitle');
-
-
   
   showButton.onclick = clearChart();
+  
+  // const showLoader = () => {
+  //   const loader = document.getElementById("loader1");  
+  //   loader.className += 'loader';
+  //   getShow();
+  // }
   
   inputBox.addEventListener("keyup", function(e) {
     if(e.keyCode === 13) {
