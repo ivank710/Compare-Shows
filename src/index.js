@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById("showTitle").value;
     nodeData.name = userInput;
 
-    const url = `https://api.tvmaze.com/singlesearch/shows/?q=${userInput}`;
+    let url = `https://api.tvmaze.com/singlesearch/shows/?q=${userInput}`;
     checkUrl(url);
 
     const response = await axios.get(
@@ -106,20 +106,32 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
       } else if (child.name === "Seasons") {
+        url = `https://api.tvmaze.com/shows/${showId}/seasons`;
+        checkUrl(url);
+
         const seasons = await axios.get(`https://api.tvmaze.com/shows/${showId}/seasons`);   //get seasons
 
         for (let i = 0; i < seasons.data.length; i++) {
           let seasonId = seasons.data[i].id;
+
+          url = `https://api.tvmaze.com/seasons/${seasonId}/episodes`;
+          checkUrl(url);
 
           const episodes = await axios.get(`https://api.tvmaze.com/seasons/${seasonId}/episodes`);
           child.children.push(episodes.data);
         }
      
       } else if (child.name === "Cast") {
+        url = `https://api.tvmaze.com/shows/${showId}/cast`;
+        checkUrl(url);
+
         const cast = await axios.get(`https://api.tvmaze.com/shows/${showId}/cast`);
 
         child.children = cast.data;
       } else if (child.name === "Crew") {
+        url = `https://api.tvmaze.com/shows/${showId}/crew`;
+        checkUrl(url);
+
         const crew = await axios.get(`https://api.tvmaze.com/shows/${showId}/crew`);
 
         child.children = crew.data;
