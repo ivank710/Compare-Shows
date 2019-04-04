@@ -68,8 +68,7 @@ button{
   display: flex;
   justify-content: center;
   text-decoration: underline;
-  font-size: 25px;
-  color: black;
+  font-size: 28px;
 }
 
 .instruct1, .read{
@@ -77,19 +76,12 @@ button{
   font-size: 23px;
 }
 
-
 .directions {
   display: flex;
   justify-content: center;
   text-decoration: underline;
-  font-size: 25px;
+  font-size: 28px;
 }
-
-/* .read {
-  padding-bottom: 10px;
-  font-size: 18px;
-} */
-
 
 .loader {
   position: absolute;

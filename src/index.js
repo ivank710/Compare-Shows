@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } else if (child.name === "Seasons") {
         const seasons = await axios.get(`https://api.tvmaze.com/shows/${showId}/seasons`);   //get seasons
-        // child.size = seasons.data.length;
 
         for (let i = 0; i < seasons.data.length; i++) {
           let seasonId = seasons.data[i].id;
