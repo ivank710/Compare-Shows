@@ -36,18 +36,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderErrors = () => {
     let errors = document.getElementsByTagName("div")[13];
     errors.className = 'errors';
-    errors.textContent = "Invalid Show";
+    errors.textContent = "Please Try Again";
     errors.style.fontWeight = "bold";
     errors.style.fontStyle = "strong";
+  };
+
+  const clearErrors = () => {
+    let divElement = document.getElementsByTagName("div")[13];
+    divElement.textContent = "";
   };
 
   const checkUrl = (url) => {
     const http = new XMLHttpRequest();
     http.open('HEAD', url, false);
     http.send();
-    if (http.status === 404) {
+    if (http.status === 404 || http.status === 429) {
       renderErrors();
-    } 
+    } else {
+      clearErrors();
+    }
   };
   
   const getShow = async () => {
@@ -60,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     nodeData.name = userInput;
 
     const url = `https://api.tvmaze.com/singlesearch/shows/?q=${userInput}`;
-
     checkUrl(url);
 
     const response = await axios.get(
