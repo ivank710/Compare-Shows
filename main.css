@@ -42,7 +42,7 @@ body {
 }
 
 input{
-  padding: 15px 35px;
+  padding: 15px 40px;
   font-size: 20px;
 
   font-family: 'Playfair Display', serif;
@@ -73,10 +73,9 @@ button{
   color: black;
 }
 
-.instruct1{
+.instruct1, .read{
   padding-bottom: 10px;
-  font-size: 18px;
-  color: black;
+  font-size: 23px;
 }
 
 
@@ -87,10 +86,10 @@ button{
   font-size: 25px;
 }
 
-.read {
+/* .read {
   padding-bottom: 10px;
   font-size: 18px;
-}
+} */
 
 
 .loader {
