@@ -168,10 +168,15 @@ document.addEventListener('DOMContentLoaded', () => {
           let personId = char.person.id;
           let charChild = { "name": char.person.name, "character": char.character.name, "children": [] };
 
+          url = `https://api.tvmaze.com/people/${personId}/castcredits`;
+          checkUrl(url);
+
           const otherShows = await axios.get(`https://api.tvmaze.com/people/${personId}/castcredits`);
           for(let g = 0; g < otherShows.data.length; g++) {
             let charCredit = otherShows.data[g];
             let showUrl = charCredit._links.show.href;
+
+            checkUrl(showUrl);
 
             const show = await axios.get(showUrl);
             const showName = show.data.name;
