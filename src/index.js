@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     clearChart();
 
     let loader = document.getElementsByTagName("div")[13];
-    console.log('hello');
     loader.className += 'loader';
 
     const userInput = document.getElementById("showTitle").value;
@@ -169,12 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputBox = document.getElementById('showTitle');
   
   showButton.onclick = clearChart();
-  
-  // const showLoader = () => {
-  //   const loader = document.getElementById("loader1");  
-  //   loader.className += 'loader';
-  //   getShow();
-  // }
   
   inputBox.addEventListener("keyup", function(e) {
     if(e.keyCode === 13) {
