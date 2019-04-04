@@ -105,8 +105,6 @@ const renderSunburst = nodeData => {
     .attr('class', 'slice')
     .on('mouseover', function (d) {
       var total = d.parent.value;
-      var percent = Math.round(1000 * d.value / total) / 10; // calculate percent
-      tooltip.select('.label').html(d.data.name); // set current label                 
       tooltip.select('.label').html(d.data.name); // set current label                 
       tooltip.style('display', 'block'); // set display   
     })

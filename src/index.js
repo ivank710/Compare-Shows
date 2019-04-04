@@ -32,16 +32,37 @@ document.addEventListener('DOMContentLoaded', () => {
     let svgEl = d3.select("svg");
     svgEl.selectAll("*").remove();
   };
+
+  const renderErrors = () => {
+    let errors = document.getElementsByTagName("div")[13];
+    errors.className = 'errors';
+    errors.textContent = "Invalid Show";
+    errors.style.fontWeight = "bold";
+    errors.style.fontStyle = "strong";
+  };
+
+  const checkUrl = (url) => {
+    const http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    if (http.status === 404) {
+      renderErrors();
+    } 
+  };
   
   const getShow = async () => {
     clearChart();
 
     let loader = document.getElementsByTagName("div")[13];
-    loader.className += 'loader';
+    loader.className = 'loader';
 
     const userInput = document.getElementById("showTitle").value;
     nodeData.name = userInput;
-    
+
+    const url = `https://api.tvmaze.com/singlesearch/shows/?q=${userInput}`;
+
+    checkUrl(url);
+
     const response = await axios.get(
       `https://api.tvmaze.com/singlesearch/shows/?q=${userInput}`
     ); 

@@ -86,8 +86,7 @@ button{
 .loader {
   position: absolute;
   left: 50%;
-  top: 40%;
-
+  top: 46%;
   z-index: 1;
   width: 150px;
   height: 150px;
@@ -102,7 +101,6 @@ button{
   height: 110px;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
-
 }
 
 @-webkit-keyframes spin {
@@ -115,13 +113,13 @@ button{
   100% { transform: rotate(360deg); }
 }
 
-div.tooltip {
+.tooltip {
   position: absolute;
   text-align: left;
   width: auto;
   height: auto;
-  padding: 10px;
-  font-size: 27px ;
+  padding: 12px;
+  font-size: 28px ;
   background: #467EF0;
   border: lightgray 2px solid;
   border-radius: 6px;
@@ -129,10 +127,16 @@ div.tooltip {
   color: white;
   font-family: 'Playfair Display', serif;
 }
-/* 
-div.tooltip p {
-	margin: 0;
-	font-size: 16px;
-	line-height: 20px;
-}  */
+
+.errors {
+  position: absolute;
+  left: 43%;
+  top: 33%;
+  color: red;
+  font-size: 30px;
+  font-weight: bold;
+  /* border: grey 2px solid; */
+  background-color: black; 
+  padding: 12px;
+}
 
