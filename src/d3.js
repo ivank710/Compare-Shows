@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 
 const renderSunburst = nodeData => {
   console.log(nodeData);
+
   let loader = document.getElementsByTagName("div")[13];
   loader.classList.remove('loader');
 
@@ -31,29 +32,8 @@ const renderSunburst = nodeData => {
     '#254E00'
   ];
 
-  const mid = [
 
-    // '#D15A86',
-    // '#8E6C8A',
-    // '#6B99A1',
-    // '#42A5B3',
-    // '#0F8C79',
-    // '#6BBBA1',
-    // '#5C8100'
-  ];
-
-  const light = [
- 
-  //   '#DCBDCF',
-  //   '#B396AD',
-  //   '#B0CBDB',
-  //   '#33B6D0',
-  //   '#7ABFCC',
-  //   '#C8D7A1',
-  //   '#A0B700'
-  ];
-
-  const palettes = [light, mid, dark];
+  const palettes = [dark];
   const lightGreenFirstPalette = palettes
     .map(d => d.reverse())
     .reduce((a, b) => a.concat(b));
@@ -95,19 +75,29 @@ const renderSunburst = nodeData => {
     return d.data.name.length * CHAR_SPACE < perimeter;
   };
 
-  
+
+  // define tooltip
+  var tooltip = d3.select('body') // select element in the DOM with id 'chart'
+    .append('div').classed('tooltip', true); // append a div element to the element we've selected    
+  tooltip.append('div') // add divs to the tooltip defined above 
+    .attr('class', 'label'); // add class 'label' on the selection                
+  tooltip.append('div') // add divs to the tooltip defined above             
+    .attr('class', 'count'); // add class 'count' on the selection
+  tooltip.append('div') // add divs to the tooltip defined above
+    .attr('class', 'percent'); // add class 'percent' on the selection
+
+
 
   const svg = d3
     .select('svg')
-    // .append('svg')
     .style('width', '95vw')
     .style('height', '95vh')
     .attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
     .on('click', () => focusOn()); // Reset zoom on canvas click
-  
+
 
   let root = d3.hierarchy(nodeData)
-  .sum(function (d) { return d.size })
+  .sum(function (d) { return d.size; });
 
   const slice = svg.selectAll('g.slice').data(partition(root).descendants());
 
@@ -117,14 +107,27 @@ const renderSunburst = nodeData => {
     .enter()
     .append('g')
     .attr('class', 'slice')
+    .on('mouseover', function (d) {
+      var total = d.parent.value;
+      var percent = Math.round(1000 * d.value / total) / 10; // calculate percent
+      tooltip.select('.label').html(d.data.name); // set current label                 
+      tooltip.style('display', 'block'); // set display   
+    })
+    .on('mouseout', function () { // when mouse leaves div                        
+      tooltip.style('display', 'none'); // hide tooltip for that element
+    })
+    .on('mousemove', function (d) { // when mouse moves                  
+      tooltip.style('top', (d3.event.layerY + 10) + 'px'); // always 10px below the cursor
+      tooltip.style('left', (d3.event.layerX + 10) + 'px'); // always 10px to the right of the mouse
+    })
     .on('click', d => {
       d3.event.stopPropagation();
       focusOn(d);
     });
 
   newSlice
-    .append('title')
-    .text(d => d.data.name + '\n' + formatNumber(d.value));
+    .append("title")
+    .text(d => d.data.name);
 
   newSlice
     .append('path')
@@ -150,7 +153,7 @@ const renderSunburst = nodeData => {
     .text(d => d.data.name)
     .style('fill', 'none')
     .style('stroke', '#E5E2E0')
-    .style('stroke-width', 12)
+    .style('stroke-width', 13)
     .style('stroke-linejoin', 'round');
 
   text

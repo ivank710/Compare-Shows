@@ -110,7 +110,7 @@ button{
   left: 50%;
   top: 40%;
 
-  z-index: -1;
+  z-index: 1;
   width: 150px;
   height: 150px;
   margin: -75px 0 0 -75px;
@@ -136,3 +136,26 @@ button{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+div.tooltip {
+  position: absolute;
+  text-align: left;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  font: 30px sans-serif;
+  /* background: #047277; */
+  background: #467EF0;
+  border: white 1px solid;
+  border-radius: 6px;
+  pointer-events: none;
+  color: white;
+}
+
+div.tooltip p {
+	margin: 0;
+	font-family: Arial;
+	font-size: 16px;
+	line-height: 20px;
+} 
+
