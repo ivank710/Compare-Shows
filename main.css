@@ -130,13 +130,13 @@ button{
 
 .errors {
   position: absolute;
-  left: 45%;
+  left: 44%;
   top: 25%;
   color: red;
   font-size: 30px;
   font-weight: bold;
   background-color: black; 
-  padding: 12px;
+  padding: 15px;
   border-radius: 4px;
 }
 
