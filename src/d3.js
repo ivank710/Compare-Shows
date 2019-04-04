@@ -81,10 +81,6 @@ const renderSunburst = nodeData => {
     .append('div').classed('tooltip', true); // append a div element to the element we've selected    
   tooltip.append('div') // add divs to the tooltip defined above 
     .attr('class', 'label'); // add class 'label' on the selection                
-  tooltip.append('div') // add divs to the tooltip defined above             
-    .attr('class', 'count'); // add class 'count' on the selection
-  tooltip.append('div') // add divs to the tooltip defined above
-    .attr('class', 'percent'); // add class 'percent' on the selection
 
 
 
@@ -110,6 +106,7 @@ const renderSunburst = nodeData => {
     .on('mouseover', function (d) {
       var total = d.parent.value;
       var percent = Math.round(1000 * d.value / total) / 10; // calculate percent
+      tooltip.select('.label').html(d.data.name); // set current label                 
       tooltip.select('.label').html(d.data.name); // set current label                 
       tooltip.style('display', 'block'); // set display   
     })
