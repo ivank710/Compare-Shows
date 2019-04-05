@@ -10,8 +10,6 @@ const renderSunburst = nodeData => {
     height = window.innerHeight,
     maxRadius = Math.min(width, height) / 2 - 5;
 
-  const formatNumber = d3.format(',d');
-
   const x = d3
     .scaleLinear()
     .range([0, 2 * Math.PI])
