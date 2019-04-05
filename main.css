@@ -99,8 +99,8 @@ button{
   border-left: 16px solid pink;
   width: 110px;
   height: 110px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
 }
 
 @-webkit-keyframes spin {
@@ -118,7 +118,7 @@ button{
   text-align: left;
   width: auto;
   height: auto;
-  padding: 12px;
+  padding: 10px;
   font-size: 28px ;
   background: #467EF0;
   border: lightgray 2px solid;

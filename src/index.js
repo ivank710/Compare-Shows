@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     children: [
     {
       name: "Info",
-      children: [{ "name": "Premiere", "children": []}, {"name": "Rating", "children": []}, {"name": "Runtime", "children": []}, {"name": "Network", "children": []},
+      children: [{ "name": "Premiere Date", "children": []}, {"name": "Rating", "children": []}, {"name": "Runtime", "children": []}, {"name": "Network", "children": []},
       {"name": "Genres", "children": []}]
     },
     {
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (child.name === "Info") {
         for (let b = 0; b < child.children.length; b++) {
           let innerChild = child.children[b];
-          if (innerChild.name === "Premiere") {
+          if (innerChild.name === "Premiere Date") {
             let premierNode = { "name": response.data.premiered, "size": 1};
             innerChild.children.push(premierNode);
           } else if (innerChild.name === "Rating") {

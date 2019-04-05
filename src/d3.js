@@ -69,8 +69,8 @@ const renderSunburst = nodeData => {
     const CHAR_SPACE = 6;
 
     const deltaAngle = x(d.x1) - x(d.x0);
-    const r = Math.max(0, (y(d.y0) + y(d.y1)) / 5);
-    const perimeter = r * deltaAngle;
+    const r = Math.max(0, (y(d.y0) + y(d.y1)) / 7);
+    const perimeter = (r * deltaAngle) - 3;
 
     return d.data.name.length * CHAR_SPACE < perimeter;
   };
