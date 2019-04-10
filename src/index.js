@@ -33,7 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
     svgEl.selectAll("*").remove();
   };
 
-  const renderErrors = () => {
+  const render404Errors = () => {
+    let errors = document.getElementsByTagName("div")[13];
+    errors.className = 'errors';
+    errors.textContent = "Invalid Show";
+    errors.style.fontWeight = "bold";
+    errors.style.fontStyle = "strong";
+  };
+
+  const render429Errors = () => {
     let errors = document.getElementsByTagName("div")[13];
     errors.className = 'errors';
     errors.textContent = "Please Try Again";
@@ -50,12 +58,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const http = new XMLHttpRequest();
     http.open('HEAD', url, false);
     http.send();
-    if (http.status === 404 || http.status === 429) {
-      renderErrors();
+    
+    if (http.status === 404) {
+      render404Errors();
+    } else if (http.status === 429) {
+      render429Errors();
     } else {
       clearErrors();
     }
   };
+
+  const showErrors = (error) => {
+    let errors = document.getElementsByTagName("div")[13];
+    errors.className = "errors";
+    errors.textContent = error;
+    errors.style.fontWeight = "bold";
+    errors.style.fontStyle = "strong";
+  }
   
   const getShow = async () => {
     clearChart();
@@ -71,7 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const response = await axios.get(
       `https://api.tvmaze.com/singlesearch/shows/?q=${userInput}`
-    ); 
+    ).catch(error => {
+      showErrors(error);
+    }); 
 
     let showId = response.data.id;
 
