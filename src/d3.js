@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
 
 const renderSunburst = nodeData => {
-  console.log(nodeData);
 
   let loader = document.getElementsByTagName("div")[13];
   loader.classList.remove('loader');
@@ -53,7 +52,7 @@ const renderSunburst = nodeData => {
     const r = Math.max(0, (y(d.y0) + y(d.y1)) / 2);
 
     const middleAngle = (angles[1] + angles[0]) / 2;
-    const invertDirection = middleAngle > 0 && middleAngle < Math.PI; // On lower quadrants write text ccw
+    const invertDirection = middleAngle > 0 && middleAngle < Math.PI; 
     if (invertDirection) {
       angles.reverse();
     }
