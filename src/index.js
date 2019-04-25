@@ -88,9 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let url = `https://api.tvmaze.com/singlesearch/shows/?q=${userInput}`;
     checkUrl(url);
 
-    const response = await axios.get(
-      `https://api.tvmaze.com/singlesearch/shows/?q=${userInput}`
-    ).catch(error => {
+    const response = await axios.get(url)
+    .catch(error => {
       showErrors(error);
     }); 
 
@@ -130,7 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
         url = `https://api.tvmaze.com/shows/${showId}/seasons`;
         checkUrl(url);
 
-        const seasons = await axios.get(`https://api.tvmaze.com/shows/${showId}/seasons`);   //get seasons
+        const seasons = await axios.get(url).catch(error => {
+          showErrors(error);
+        });   //get seasons
 
         for (let i = 0; i < seasons.data.length; i++) {
           let seasonId = seasons.data[i].id;
@@ -138,7 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
           url = `https://api.tvmaze.com/seasons/${seasonId}/episodes`;
           checkUrl(url);
 
-          const episodes = await axios.get(`https://api.tvmaze.com/seasons/${seasonId}/episodes`);
+          const episodes = await axios.get(url).catch(error => {
+            showErrors(error);
+          });
           child.children.push(episodes.data);
         }
      
@@ -146,14 +149,18 @@ document.addEventListener('DOMContentLoaded', () => {
         url = `https://api.tvmaze.com/shows/${showId}/cast`;
         checkUrl(url);
 
-        const cast = await axios.get(`https://api.tvmaze.com/shows/${showId}/cast`);
+        const cast = await axios.get(url).catch(error => {
+          showErrors(error);
+        });
 
         child.children = cast.data;
       } else if (child.name === "Crew") {
         url = `https://api.tvmaze.com/shows/${showId}/crew`;
         checkUrl(url);
 
-        const crew = await axios.get(`https://api.tvmaze.com/shows/${showId}/crew`);
+        const crew = await axios.get(url).catch(error => {
+          showErrors(error);
+        });
 
         child.children = crew.data;
       }
@@ -192,14 +199,14 @@ document.addEventListener('DOMContentLoaded', () => {
           url = `https://api.tvmaze.com/people/${personId}/castcredits`;
           checkUrl(url);
 
-          const otherShows = await axios.get(`https://api.tvmaze.com/people/${personId}/castcredits`);
+          const otherShows = await axios.get(url).catch(error => {showErrors(error);});
           for(let g = 0; g < otherShows.data.length; g++) {
             let charCredit = otherShows.data[g];
             let showUrl = charCredit._links.show.href;
 
             checkUrl(showUrl);
 
-            const show = await axios.get(showUrl);
+            const show = await axios.get(showUrl).catch(error => {showErrors(error);});
             const showName = show.data.name;
             let showNode = {"name": showName, "size": 1};
             charChild.children.push(showNode);
