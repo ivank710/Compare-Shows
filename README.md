@@ -10,7 +10,7 @@ Live Link:
 
 ## Technologies 
 
-Show Me is a pure JavaScript project that utilizes D3.js for its sunburst chart and Axios for external API calls
+Show Me is a pure JavaScript project that utilizes D3.js for its sunburst chart and Axios for external API calls.
 
 ## Site
 
